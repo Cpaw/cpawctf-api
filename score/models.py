@@ -18,6 +18,7 @@ class Category(models.Model):
         return self.name
 
 class Challenge(models.Model):
+    """ Challenge model """
     category = models.ForeignKey(Category)
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -28,16 +29,19 @@ class Challenge(models.Model):
         return self.name
 
 class Notice(models.Model):
+    """ Notice model """
     title = models.CharField(max_length=50)
     description = models.TextField()
     priority = models.IntegerField(default=0)
-
     def __unicode__(self):
         return self.title
 
 class Solved(models.Model):
+    """ Solved info model """
     users = models.ForeignKey(Users)
     challenge = models.ForeignKey(Challenge)
     score = models.IntegerField(default=0)
     time = models.DateTimeField()
+    def __unicode__(self):
+        return self.users
     
