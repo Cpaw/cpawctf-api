@@ -12,6 +12,7 @@ class Users(models.Model):
 
     
 class Category(models.Model):
+    """ Challenge's category """
     name = models.CharField(max_length=30)
     def __unicode__(self):
         return self.name
@@ -34,5 +35,9 @@ class Notice(models.Model):
     def __unicode__(self):
         return self.title
 
-
+class Solved(models.Model):
+    users = models.ForeignKey(Users)
+    challenge = models.ForeignKey(Challenge)
+    score = models.IntegerField(default=0)
+    time = models.DateTimeField()
     
