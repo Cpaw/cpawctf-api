@@ -7,8 +7,15 @@ class Users(models.Model):
     mail = models.EmailField()
     score = models.IntegerField(default=0)
 
+    def __unicode__(self):
+        return self.display_name
+
+    
 class Category(models.Model):
     name = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return self.name
 
 class Challenge(models.Model):
     category = models.ForeignKey(Category)
@@ -21,3 +28,12 @@ class Challenge(models.Model):
     def __unicode__(self):
         return self.name
 
+class Notice(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length = 50000)
+    priority = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.title
+    
+    
