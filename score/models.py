@@ -10,3 +10,14 @@ class Users(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
+class Challenge(models.Model):
+    category = models.ForeignKey(Category)
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=50000)
+    data = models.ImageField(upload_to='data')
+    score = models.IntegerField(default=0)
+    flags = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
+
