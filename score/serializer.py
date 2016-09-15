@@ -16,6 +16,11 @@ class UsersSerializer(serializers.ModelSerializer):
             validated_data['password'] = make_password(password)
             return Users.objects.create(**validated_data)
 
+class AuthInputSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
