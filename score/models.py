@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Users(models.Model):
     """ User model """
+    user = models.OneToOneField(User)
     display_name = models.CharField(max_length=32)
     mail = models.EmailField()
     score = models.IntegerField(default=0)
