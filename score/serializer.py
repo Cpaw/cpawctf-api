@@ -21,7 +21,6 @@ class AuthInputSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
 
-
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
