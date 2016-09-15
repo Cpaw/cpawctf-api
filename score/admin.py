@@ -17,7 +17,4 @@ class Challenge(admin.ModelAdmin):
 class Notice(admin.ModelAdmin):
     pass
 
-@admin.register(Solved)
-class Solved(admin.ModelAdmin):
-    pass
 

@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 class Users(models.Model):
     """ User model """
-    user = models.OneToOneField(User)
     display_name = models.CharField(max_length=32)
     mail = models.EmailField()
     score = models.IntegerField(default=0)
@@ -45,4 +44,4 @@ class Solved(models.Model):
     challenge = models.ForeignKey(Challenge)
     score = models.IntegerField(default=0)
     time = models.DateTimeField()
-    
+    objects = models.Manager()
