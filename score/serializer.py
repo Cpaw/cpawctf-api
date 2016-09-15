@@ -1,11 +1,21 @@
 # coding: utf-8
 from rest_framework import serializers
 from .models import *
+from django.contrib.auth import hashers
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('display_name', 'mail', 'score')
+        fields = ('user', 'display_name', 'mail', 'score')
+        write_only_fields = ('user.password')
+        read_only_fields = ('user.id')
+
+        def create(self, validated_data):
+            """ regist password """
+            password = validated_data.get('password')
+            validated_data['password'] = make_password(password)
+            return Users.objects.create(**validated_data)
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

@@ -39,6 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'score',
     'rest_framework',
+    'rest_framework.authtoken',
+]
+
+REST_FRAMEWORK = [
+    'DEFAULT_PERMISSION_CLASSES': {
+        'rest_framework.permissions.IsAuthenticated',
+    },
+    'DEFAULT_AUTHENTICATION_CLASSES': {
+        'rest_framework.authentication.TokenAuthentication',
+    },
 ]
 
 MIDDLEWARE = [
@@ -104,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'cpaw_api.Player'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -123,3 +134,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+

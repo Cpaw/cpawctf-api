@@ -1,17 +1,41 @@
 from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
-class Users(models.Model):
+class PlayerManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not name:
+            raise ValueError('Must have a name.')
+        if not email:
+            raise ValueError('Must have a email address.')
+        
+        email = PlayerManager.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+        return self.create_user(email, password)
+    
+class Player(AbstractBaseUser):
     """ User model """
-    user = models.OneToOneField(User)
-    display_name = models.CharField(max_length=32)
-    mail = models.EmailField()
+    name = models.CharField(max_length=32, unique=True)
+    email = models.EmailField(max_length=128, unique=True)
     score = models.IntegerField(default=0)
+
+    USERNAME_FIELD = 'name'
+    
+    objects = PlayerManager()
+
+    class Meta:
+        db_table = 'score'
+        swappable = 'AUTH_USER_MODEL'
+    
     def __unicode__(self):
-        return self.display_name
+        return self.name
 
     
 class Category(models.Model):

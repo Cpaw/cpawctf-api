@@ -9,7 +9,7 @@ from rest_framework import permissions
 from rest_framework import viewsets, filters
 from .models import *
 from .serializer import *
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsAdmin
 
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
