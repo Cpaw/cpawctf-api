@@ -17,8 +17,8 @@ class PlayerManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password):
-        return self.create_user(email, password)
+    def create_superuser(self, name, email, password):
+        return self.create_user(name, email, password)
     
 class Player(AbstractBaseUser):
     """ User model """
@@ -31,7 +31,7 @@ class Player(AbstractBaseUser):
     objects = PlayerManager()
 
     class Meta:
-        db_table = 'score'
+        db_table = 'score_player'
         swappable = 'AUTH_USER_MODEL'
     
     def __unicode__(self):
@@ -65,7 +65,7 @@ class Notice(models.Model):
 
 class Solved(models.Model):
     """ Solved info model """
-    users = models.ForeignKey(Users)
+    player = models.ForeignKey(Player)
     challenge = models.ForeignKey(Challenge)
     score = models.IntegerField(default=0)
     time = models.DateTimeField()

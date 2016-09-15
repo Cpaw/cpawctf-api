@@ -3,12 +3,12 @@ from rest_framework import serializers
 from .models import *
 from django.contrib.auth import hashers
 
-class UsersSerializer(serializers.ModelSerializer):
+class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Users
-        fields = ('user', 'display_name', 'mail', 'score')
-        write_only_fields = ('user.password')
-        read_only_fields = ('user.id')
+        model = Player
+        fields = ('name', 'mail', 'password', 'score')
+        write_only_fields = ('password')
+        read_only_fields = ('name')
 
         def create(self, validated_data):
             """ regist password """
