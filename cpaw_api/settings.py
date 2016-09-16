@@ -40,11 +40,10 @@ INSTALLED_APPS = [
     'score',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
-
-
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'cpaw_api.urls'
@@ -74,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cpaw_api.wsgi.application'
 
-
+CORS_ORIGIN_ALLOW_ALL = True
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
