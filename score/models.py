@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 from django.contrib.auth.models import User
-    
+from django.utils.timezone import now
+
 class Player(models.Model):
     """ User model """
     user = models.OneToOneField(User)
@@ -35,6 +36,7 @@ class Notice(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     priority = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=now)
     def __unicode__(self):
         return self.title
 
@@ -43,5 +45,5 @@ class Solved(models.Model):
     player = models.ForeignKey(Player)
     challenge = models.ForeignKey(Challenge)
     score = models.IntegerField(default=0)
-    time = models.DateTimeField()
+    time = models.DateTimeField(default=now)
     objects = models.Manager()

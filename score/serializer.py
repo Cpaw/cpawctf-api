@@ -1,7 +1,6 @@
 # coding: utf-8
 from rest_framework import serializers
 from .models import *
-from django.contrib.auth import hashers
 
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,12 +8,6 @@ class PlayerSerializer(serializers.ModelSerializer):
         fields = ('name', 'mail', 'password', 'score')
         write_only_fields = ('password')
         read_only_fields = ('name')
-
-        def create(self, validated_data):
-            """ regist password """
-            password = validated_data.get('password')
-            validated_data['password'] = make_password(password)
-            return Users.objects.create(**validated_data)
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,14 +22,10 @@ class ChallengeSerializer(serializers.ModelSerializer):
 class NoticeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notice
-        fields = ('title', 'description', 'priority')
+        fields = ('title', 'description', 'priority', 'created_at')
 
 class Solved(serializers.ModelSerializer):
     class Meta:
         model = Solved
         fields = ('users', 'challenge', 'score', 'time')
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Player
-        fields = ('user.name', 'email', 'score')
