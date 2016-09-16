@@ -32,3 +32,7 @@ class NoticeViewSet(viewsets.ModelViewSet):
     serializer_class = NoticeSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Player.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
