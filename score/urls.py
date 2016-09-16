@@ -3,7 +3,6 @@ from rest_framework import routers
 from .views import *
 
 router = routers.DefaultRouter()
-router.register(r'auth', AuthView.as_view())
 router.register(r'users/(?P<user_id>.+)/$', PlayerViewSet)
 router.register(r'category', CategoryViewSet)
 router.register(r'challenge', ChallengeViewSet)

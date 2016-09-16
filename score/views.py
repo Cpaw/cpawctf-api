@@ -9,28 +9,9 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework import viewsets, filters
-from rest_framework_jwt.settings import api_settings
 from .models import *
 from .serializer import *
 from .permissions import *
-
-jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-
-class AuthView(generics.GenericAPIView):
-    serializer_class = AuthInputSerializer
-    def post(self, request):
-        serializer = AuthInputSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = authenticate(**serializer.data)
-
-        if not user:
-            raise AuthenticationFailed()
-        payload = jwt_payload_handler(user)
- 
-        return Response({
-            'token': jwt_encode_handler(payload),
-        })
 
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()
