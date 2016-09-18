@@ -5,9 +5,7 @@ from .models import *
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
-        fields = ('name', 'mail', 'password', 'score')
-        write_only_fields = ('password')
-        read_only_fields = ('name')
+        fields = ('name', 'score')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

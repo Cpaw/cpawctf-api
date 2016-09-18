@@ -32,3 +32,7 @@ class NoticeViewSet(viewsets.ModelViewSet):
     serializer_class = NoticeSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+class ScorelistViewSet(viewsets.ModelViewSet):
+    queryset = Player.objects.order_by('score').reverse()
+    serializer_class = PlayerSerializer
+    
