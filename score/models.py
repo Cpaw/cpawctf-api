@@ -1,24 +1,27 @@
 from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.hashers import make_password, check_password
 from django.utils.timezone import now
 
-class Player(models.Model):
+class Player(User):
     """ User model """
     user = models.OneToOneField(User)
-    name = models.CharField(max_length=100, unique=True)
-    email = models.EmailField(max_length=128, unique=True)
     score = models.IntegerField(default=0)
     def __unicode__(self):
         return self.name
 
-    
+    def set_password(self, password):
+        self.password = make_password(password)
+
+        
 class Category(models.Model):
     """ Challenge's category """
     name = models.CharField(max_length=30)
     def __unicode__(self):
         return self.name
+
 
 class Challenge(models.Model):
     """ Challenge model """
@@ -31,6 +34,7 @@ class Challenge(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Notice(models.Model):
     """ Notice model """
     title = models.CharField(max_length=50)
@@ -39,6 +43,7 @@ class Notice(models.Model):
     created_at = models.DateTimeField(default=now)
     def __unicode__(self):
         return self.title
+
 
 class Solved(models.Model):
     """ Solved info model """
