@@ -10,7 +10,7 @@ class Player(User):
     user = models.OneToOneField(User)
     score = models.IntegerField(default=0)
     def __unicode__(self):
-        return self.name
+        return self.username
 
     def set_password(self, password):
         self.password = make_password(password)

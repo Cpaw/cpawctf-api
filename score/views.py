@@ -18,7 +18,6 @@ from .permissions import *
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
-    models = Player
     
     def get_permissions(self):
         return (AllowAny() if self.request.method == 'POST'

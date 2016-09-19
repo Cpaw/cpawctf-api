@@ -6,11 +6,11 @@ from .models import *
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
-        fields = ('username', 'password', 'email', 'score')
-        read_only_fields = ('email', 'score')
+        fields = ('username','email', 'password', 'score')
+        read_only_fields = ('score',)
 
     def create(self, validated_data):
-        user = User(email=validated_data['email'], username=validated_data['name'])
+        user = User(email=validated_data['email'], username=validated_data['username'])
         user.set_password(validated_data['password'])
         user.save()
         return user
